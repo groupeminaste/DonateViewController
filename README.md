@@ -29,6 +29,11 @@ func openDonateViewController() {
     // Create the view controller
     let controller = DonateViewController()
     
+    // Customize view title, header and footer (optional)
+    controller.title = "Donate"
+    controller.header = "Select an amount to donate:"
+    controller.footer = "The donations help us to improve our projects (...)"
+    
     // Add donations
     controller.add(identifier: "my.app.identifier.mydonation1")
     controller.add(identifier: "my.app.identifier.mydonation2")
@@ -40,11 +45,15 @@ func openDonateViewController() {
     navigationController?.pushViewController(controller, animated: true)
     
     // 2. In a modal
-    present(controller, animated: true, completion: nil)
+    present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
 }
 ```
 
-> **WARNING**: You need to register your in app purchases on App Store Connect to make it work. The name and the price of purchases will be used.
+> ⚠️ You need to register your in app purchases in App Store Connect to make it work. The name and the price of purchases will be used.
+
+## Customize colors for theming (iOS < 13)
+
+Before iOS 13, no dark theme was implemented in controllers. If you want to implement your custom dark theme, create an extension or subclass DonateViewController to change the colors of the view controller. (background, ...)
 
 ## Donate to the developer
 

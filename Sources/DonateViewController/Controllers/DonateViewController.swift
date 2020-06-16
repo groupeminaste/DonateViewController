@@ -21,7 +21,7 @@ import Foundation
 import UIKit
 import StoreKit
 
-public class DonateViewController: UITableViewController, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+open class DonateViewController: UITableViewController, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     /// Donations
     private var donations = [Donation]()
@@ -48,7 +48,7 @@ public class DonateViewController: UITableViewController, SKProductsRequestDeleg
     }
     
     /// Required init (not implemented)
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -125,7 +125,9 @@ public class DonateViewController: UITableViewController, SKProductsRequestDeleg
         }
         
         // Reload the table view data
-        tableView.reloadData()
+        DispatchQueue.main.sync {
+            tableView.reloadData()
+        }
     }
     
     /// Handle when transactions are updated
