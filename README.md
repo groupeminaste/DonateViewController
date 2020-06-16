@@ -15,6 +15,8 @@ Add `https://github.com/GroupeMINASTE/DonateViewController.git` to your Swift Pa
 
 ## Usage
 
+> ⚠️ You need to register your in app purchases in App Store Connect to make it work. The name and the price of purchases will be used.
+
 First, import the package in your view controller where you want to open the DonateViewController.
 
 ```swift
@@ -49,7 +51,11 @@ func openDonateViewController() {
 }
 ```
 
-> ⚠️ You need to register your in app purchases in App Store Connect to make it work. The name and the price of purchases will be used.
+And call this method when you want to open the DonateViewController:
+
+```swift
+openDonateViewController()
+```
 
 ## Customize colors for theming (iOS < 13)
 
