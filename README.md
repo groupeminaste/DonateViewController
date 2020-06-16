@@ -44,6 +44,8 @@ func openDonateViewController() {
 }
 ```
 
+> **WARNING**: You need to register your in app purchases on App Store Connect to make it work. The name and the price of purchases will be used.
+
 ## Donate to the developer
 
 Feel free to make a donation to help the developer to make more great content! [Donate now](https://paypal.me/NathanFallet)
