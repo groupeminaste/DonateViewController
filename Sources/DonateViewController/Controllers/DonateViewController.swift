@@ -23,6 +23,9 @@ import StoreKit
 
 open class DonateViewController: UITableViewController, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
+    /// Delegate
+    public weak var delegate: DonateViewControllerDelegate?
+    
     /// Donations
     private var donations = [Donation]()
     
@@ -134,10 +137,22 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         // Iterate transactions
         for transaction in transactions {
-            // Check the transaction state
-            if transaction.transactionState != .purchasing {
-                // Finish transaction if not purchasing state
-                queue.finishTransaction(transaction)
+            // Get the corresponding donation
+            if let donation = donations.first(where: { $0.identifier == transaction.payment.productIdentifier }) {
+                // Check the transaction state
+                if transaction.transactionState == .purchased {
+                    // Donation succeed
+                    delegate?.donateViewController(self, didDonationSucceed: donation)
+                } else if transaction.transactionState == .failed {
+                    // Donation failed
+                    delegate?.donateViewController(self, didDonationFailed: donation)
+                }
+                
+                // End the transaction if needed
+                if transaction.transactionState != .purchasing {
+                    // Finish transaction if not purchasing state
+                    queue.finishTransaction(transaction)
+                }
             }
         }
     }
