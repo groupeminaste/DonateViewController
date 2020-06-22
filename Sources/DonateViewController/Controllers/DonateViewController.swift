@@ -132,7 +132,7 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
         
         // Reload the table view data
         DispatchQueue.main.async {
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
