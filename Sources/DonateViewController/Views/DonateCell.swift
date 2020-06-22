@@ -22,8 +22,19 @@ import UIKit
 
 public class DonateCell: UITableViewCell {
     
+    public let loading = UIActivityIndicatorView()
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        
+        // Add loading indicator to cell
+        contentView.addSubview(loading)
+        
+        // Configure it
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor).isActive = true
+        loading.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
+        loading.hidesWhenStopped = true
     }
     
     required init?(coder: NSCoder) {
@@ -32,8 +43,27 @@ public class DonateCell: UITableViewCell {
     
     @discardableResult
     public func with(donation: Donation) -> DonateCell {
-        textLabel?.text = donation.product?.localizedTitle
-        detailTextLabel?.text = donation.product?.localizedPrice
+        // Check if the product is loaded
+        if let product = donation.product {
+            // Set the text
+            textLabel?.text = product.localizedTitle
+            detailTextLabel?.text = product.localizedPrice
+            
+            // Stop loading if required
+            if loading.isAnimating {
+                loading.stopAnimating()
+            }
+        } else {
+            // Clear the text
+            textLabel?.text = nil
+            detailTextLabel?.text = nil
+            
+            // Start loading if required
+            if !loading.isAnimating {
+                loading.startAnimating()
+            }
+        }
+        
         return self
     }
     

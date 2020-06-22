@@ -111,7 +111,7 @@ That's all, you're ready to receive donations!
 
 ## Customize colors for theming (iOS < 13)
 
-Before iOS 13, no dark theme was implemented in controllers. If you want to implement your custom dark theme, create an extension or subclass `DonateViewController` to change the colors of the view controller. (background, ...)
+Before iOS 13, no dark theme was implemented in controllers. If you want to implement your custom dark theme, subclass `DonateViewController` and `DonateCell` to change the colors of the views. (background, ...)
 
 ## Donate to the developer
 

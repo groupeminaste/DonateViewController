@@ -26,6 +26,9 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     /// Delegate
     public weak var delegate: DonateViewControllerDelegate?
     
+    /// Cell class
+    private let cellClass: DonateCell.Type
+    
     /// Donations
     private var donations = [Donation]()
     
@@ -39,13 +42,19 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     public var footer: String?
     
     /// Initializer
-    public init() {
+    public init(style: UITableView.Style = .grouped, cellClass: DonateCell.Type = DonateCell.self) {
+        // Save cell class
+        self.cellClass = cellClass
+        
         // Init the table view as a grouped one
-        super.init(style: .grouped)
+        super.init(style: style == .plain ? .grouped : style)
     }
     
     /// Initializer with a custom style
     public override init(style: UITableView.Style) {
+        // Set default cell class
+        self.cellClass = DonateCell.self
+        
         // Init, but replace plain with grouped
         super.init(style: style == .plain ? .grouped : style)
     }
@@ -61,7 +70,7 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
         super.viewDidLoad()
 
         // Register cell
-        tableView.register(DonateCell.self, forCellReuseIdentifier: "donateCell")
+        tableView.register(cellClass, forCellReuseIdentifier: "donateCell")
         
         // Add the observer
         paymentQueue.add(self)
