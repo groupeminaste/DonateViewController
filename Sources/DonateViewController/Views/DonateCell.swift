@@ -20,7 +20,7 @@
 import Foundation
 import UIKit
 
-public class DonateCell: UITableViewCell {
+open class DonateCell: UITableViewCell {
     
     public let loading = UIActivityIndicatorView()
     
