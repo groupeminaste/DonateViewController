@@ -56,7 +56,10 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     }
     
     /// Load the view
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
+        // Call super class
+        super.viewDidLoad()
+
         // Register cell
         tableView.register(DonateCell.self, forCellReuseIdentifier: "donateCell")
         
