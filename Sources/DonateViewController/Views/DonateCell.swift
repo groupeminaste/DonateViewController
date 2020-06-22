@@ -42,7 +42,7 @@ open class DonateCell: UITableViewCell {
     }
     
     @discardableResult
-    public func with(donation: Donation) -> DonateCell {
+    open func with(donation: Donation) -> DonateCell {
         // Check if the product is loaded
         if let product = donation.product {
             // Set the text
