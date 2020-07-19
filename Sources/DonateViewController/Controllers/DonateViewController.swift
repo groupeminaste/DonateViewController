@@ -35,6 +35,9 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     /// Payment queue
     private let paymentQueue = SKPaymentQueue()
     
+    /// Strong reference to request
+    private var request: SKProductsRequest?
+    
     /// View header
     public var header: String?
     
@@ -88,9 +91,9 @@ open class DonateViewController: UITableViewController, SKProductsRequestDelegat
     /// Update donation datas
     public func updateDonationProducts() {
         // Create a request
-        let request = SKProductsRequest(productIdentifiers: Set(donations.filter({ $0.product == nil }).map({ $0.identifier })))
-        request.delegate = self
-        request.start()
+        request = SKProductsRequest(productIdentifiers: Set(donations.filter({ $0.product == nil }).map({ $0.identifier })))
+        request?.delegate = self
+        request?.start()
     }
     
     /// Number of sections in the donate view controller
